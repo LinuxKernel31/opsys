@@ -1,0 +1,205 @@
+<html>
+    <title>Creating Real-Time Charts with Flask</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!--suppress JSUnresolvedLibraryURL -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--suppress JSUnresolvedLibraryURL -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+
+<script>
+
+  
+  function toggleSidebar()
+  {
+    document.getElementById("sidenav").classList.toggle('active');
+  }
+  
+</script>
+<style>
+
+*
+{
+  margin: 0px;
+  padding: 0px;
+  font-family: sans-serif;
+}
+
+#dashboard
+{
+  width: 100%;
+  height: 100%;
+  left: 220px;
+  position: relative;
+}
+
+body{
+    background-color: 	#141d26;
+    background-size: cover;
+    
+  }
+table{
+ 
+  width: 50%;
+  color: white;
+}
+
+#logo
+{
+  background-image: url('static/amazon-logo.png');
+  background-repeat: no-repeat;
+  width:220px;
+  height: 150px;
+  background-size: 220px 100px;
+}
+#sidenav
+{
+    position: fixed;
+    width:220px;
+    height:100%;
+    background :	#243447;
+    transition: all 500ms linear;
+}
+
+#sidenav ul li {
+    color: rgba(230,230,230,0.9);
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px sold rgba(100,100,100,0.3);
+    width:200px;
+ 
+}
+#sidenav ul li a
+{
+  text-decoration: none;
+  color: rgba(230,230,230,0.9);
+  
+}
+
+#sidenav ul li a:hover {
+  background: rgba(230,230,230,0.9);
+  color: rgba(230, 230, 230, 0.9);
+
+}
+#sidenav .toggle-btn
+{
+  position:absolute;
+  left: 230px;
+  top: 20px;
+}
+#sidenav .toggle-btn span
+{
+  display:block;
+  width: 30px;
+  height:5px;
+  background: #151719;
+  margin: 5px 0px;
+}
+#sentiment-chart
+{
+  width:40%;
+  height: 40%;
+}
+
+#flex-box-holder
+{
+  font-family: sans-serif;
+  color:rgba(230, 230, 230, 0.9);
+  display: flex;
+  margin-top:0px;
+  width:70%;
+  height:200px;
+  background: #243447;
+  float:left;
+  margin-left: 175px;
+  margin-top: 30px;
+  border-color: 	#141d26;
+  border-style: solid;
+  border-radius: 10px 10px 10px;
+  
+}
+#flex-box-holder div
+{
+  margin-left: 20px;
+}
+.chart-holder div
+{
+  float:left;
+}
+
+#flex-box
+{
+  margin-top: 15px;
+  border-radius: 10px;
+  width: 200px;
+  height: 150px;
+  background: #141d26;
+  margin-left: 5px;
+}
+</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div id="sidenav">
+
+  <center>
+  <div id="logo">
+
+  </div>
+
+  <ul>
+    <li><i class="small material-icons">timeline</i><a href="#">HOME</a></li>
+    <li><a href="#">TOOLS</a></li>
+    <li><a href="#">RECOMMENDER</a></li>
+ 
+  </ul>
+</center>
+</div>
+
+<div id="dashboard">
+  <div class="count" style="padding: 100px; color:white;">
+    <h6>Pos</h6><p id="pos" style="color: white;">{{ positive_count }}</p><br>
+    <h6>Neg</h6><p id="neg" style="color: white;">{{ negative_count }}</p><br>
+    <h6>Neu</h6><p id="neu" style="color: white;">{{ neutral_count }}</p>
+  </div>
+  
+<table>
+  <thead>
+    <tr>
+      <th>Sentence</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for sentences in sentence%}
+    <tr>
+      <td>{{ sentences.sentence }}</td>
+      <td id="{{sentences.sentiment}}">{{ sentences.sentiment }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+    </table>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  window.onload = function(){
+    setInterval(function(){
+      window.location.reload();
+    }, 1000);
+  }
+</script>
+</body>
+
+</html>
