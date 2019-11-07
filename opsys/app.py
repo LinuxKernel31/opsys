@@ -38,8 +38,8 @@ def fcfs(message):
     newval = []
     sjfval = []
     base = 0
+    base1 = 0
     fcfs_sum = 0
-    sjf_sum = 0
     if request.method == 'POST':
         for i in range(int(message)):
             value = int(request.form['job' + str(i)])
@@ -51,8 +51,13 @@ def fcfs(message):
             newval.append(base)
 
         for value in sorted(sjf):
-            base += int(value)
-            sjfval.append(base)
+            base1 += int(value)
+            sjfval.append(base1)
+
+        print(sum(sjfval[:len(sjfval)-1]))
+        print(sum(newval[:len(newval)-1]))
+        print(newval)
+        print(sjfval)
             
         # print(newval)
         return render_template('index.html', fcfs=newval, sjf = sjfval)

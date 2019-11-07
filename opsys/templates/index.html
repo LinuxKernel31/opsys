@@ -40,16 +40,24 @@
       {% endif %}
         {% if fcfs %}
         <h4>First Come First Serve</h4>
+        <button class="btn waves-effect waves-light" type="submit" name="action">0 
+            <i class="material-icons right">send</i>
+        
         {% for values in fcfs %}
+        </button>
       <button class="btn waves-effect waves-light" type="submit" name="action">{{values}}
           <i class="material-icons right">send</i>
         </button>
         {% endfor %}
 
         {% endif %}
-
-        {% if sjf %}
+        
+       
         <h4>Shortest Job First</h4>
+        {% if sjf %}
+        <button class="btn waves-effect waves-light" type="submit" name="action">0 
+            <i class="material-icons right">send</i>
+            </button>
         {% for values in sjf %}
       <button class="btn waves-effect waves-light" type="submit" name="action">{{values}}
           <i class="material-icons right">send</i>
