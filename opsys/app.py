@@ -45,7 +45,7 @@ def fcfs(message):
             value = int(request.form['job' + str(i)])
             values.append(value)
             sjf.append(value)
-            
+
         for value in values:
             base += int(value)
             newval.append(base)
@@ -58,9 +58,9 @@ def fcfs(message):
         print(sum(newval[:len(newval)-1]))
         print(newval)
         print(sjfval)
-            
+
         # print(newval)
-        return render_template('index.html', fcfs=newval, sjf = sjfval)
+        return render_template('index.html', fcfs= newval, sjf= sjfval, totalval= float(sum(newval[:len(newval)-1])/message), sjfval= float(sum(sjfval[:len(sjfval)-1])/message) )
     else:
         return "Bad Request"
 
